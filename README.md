@@ -30,7 +30,15 @@ cd Hospital-System-Backend
 npm install
 ```
 
-3. Create a `.env` file based on `.env.example` and add your environment variables.
+3. Create a `.env` file with the following environment variables:
+```
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/hospital_db
+JWT_SECRET=your_jwt_secret_key
+PORT=5000
+NODE_ENV=development
+FRONTEND_URL=https://hosptial-system-frontend.vercel.app
+CORS_ORIGIN=https://hosptial-system-frontend.vercel.app
+```
 
 4. Run the development server:
 ```bash
