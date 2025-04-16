@@ -25,6 +25,14 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // Routes
+app.get('/', (req, res) => {
+  res.status(200).send('Hospital Management System API is running');
+});
+
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', message: 'API is healthy' });
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/patients', patientRoutes);
 app.use('/api/doctors', doctorRoutes);
@@ -32,7 +40,12 @@ app.use('/api/appointments', appointmentRoutes);
 
 // MongoDB connection
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect(process.env.MONGODB_URI, {
+    serverSelectionTimeoutMS: 30000,
+    socketTimeoutMS: 45000,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
   .then(() => console.log('MongoDB connected successfully'))
   .catch((err) => console.error('MongoDB connection error:', err));
 
